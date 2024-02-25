@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "analex.h"
 #include "pilha.h"
 
 int token;
+char postfix[100];  
 void E();
 void T();
 void E_linha();
@@ -41,6 +43,7 @@ void E_linha() {
 			printf("+");
 			reconhecer('+');
 			T();
+			strcat(postfix, "+");
 			a = pop();
 			b = pop();
 			push(b+a);
@@ -50,6 +53,7 @@ void E_linha() {
 			printf("-");
 			reconhecer('-');
 			T();
+			strcat(postfix, "-");
 			a = pop();
 			b = pop();
 			push(b-a);
@@ -64,6 +68,7 @@ void T_linha() {
 			printf("*");
 			reconhecer('*');
 			F();
+			strcat(postfix, "*");
 			a = pop();
 			b = pop();
 			push(b*a);
@@ -73,6 +78,7 @@ void T_linha() {
 			printf("/");
 			reconhecer('/');
 			F();
+			strcat(postfix, "/");
 			a = pop();
 			b = pop();
 			push(b/a);
@@ -86,6 +92,7 @@ void F() {
 		case NUM:
 			printf("%d", tokenval);
 			push(tokenval);
+			snprintf(postfix + strlen(postfix), sizeof(postfix) - strlen(postfix), "%d", tokenval);
 			reconhecer(NUM);
 			return;
 		case 40:
@@ -102,16 +109,18 @@ void F() {
 
 void main() {
 	while(1){
+		strcpy(postfix, ("Expressão pós-fixa: "));
 		token = analex();
 		if (token == 0)
 			exit(1);
+		printf("Expressão infixa: ");
 		E();
 		if (token != ';')
 			erro();
 		else {
 			printf(";\n");
-			printf("Sucesso!!\n");
-			printf("Resultado: %d\n\n", pop());
+			printf("%s", postfix);
+			printf("\nResultado: %d\n\n", pop());
 		}
 	}
 }
