@@ -14,8 +14,8 @@ void F();
 void erro();
 void reconhecer(int tok);
 void erro() {
-	printf("Erro no token: %d\n", token);
-	printf("Erro sintatico\n");
+	printf("\nErro no token: %d\n", token);
+	printf("Erro sintatico na linha: %d\n", linha);
 	exit(1);
 }
 
@@ -106,21 +106,3 @@ void F() {
 	}
 }
 
-
-void main() {
-	while(1){
-		strcpy(postfix, ("Expressão pós-fixa: "));
-		token = analex();
-		if (token == 0)
-			exit(1);
-		printf("Expressão infixa: ");
-		E();
-		if (token != ';')
-			erro();
-		else {
-			printf(";\n");
-			printf("%s", postfix);
-			printf("\nResultado: %d\n\n", pop());
-		}
-	}
-}

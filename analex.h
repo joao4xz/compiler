@@ -49,4 +49,9 @@ int analex() {
         ungetc(ch, stdin);
         return NUM;
     }
+
+    if(ch == EOF)
+        exit(1);
+	printf("Erro lexico na linha: %d", linha);
+	exit(1);
 }

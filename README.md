@@ -2,6 +2,10 @@
 
 Esse trabalho consiste no desenvolvimento de um analisador de expressões aritméticas utilizando técnicas de construção de compiladores. A divisão de arquivos ocorre da seguinte maneira:
 
+#### Arquivo Principal
+
+- main.c
+
 #### Analisador Léxico
 
 - analex.c
@@ -21,10 +25,10 @@ Para utilizar somente o analisador léxico compile o arquivo `analex.c`:
 gcc analex.c -o analex
 ```
 
-Para utilizar toda a aplicação compile o arquivo `sint.c`:
+Para utilizar toda a aplicação compile o arquivo `main.c`:
 
 ```shell
-gcc sint.c -o sint
+gcc main.c -o main
 ```
 
 Execute o arquivo compilado:
@@ -35,7 +39,7 @@ Execute o arquivo compilado:
 # Analisador léxico + Arquivo de teste
 ./analex < teste.txt
 # Aplicação completa
-./sint.c
+./main.c
 # Aplicação completa + Arquivo de teste
-./sint.c < teste.txt
+./main.c < teste.txt
 ```
